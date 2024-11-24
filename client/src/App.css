@@ -1,0 +1,121 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+:root {
+
+  --black: #222;
+  --white: #fff;
+  --red-light: #f8d7da;
+  --red-dark: #842029;
+  --green-light: #d1e7dd;
+  --green-dark: #0f5132;
+  --orang: #ea9516;
+  --gray: #968d8f;
+  --gray-mid:#d7c9cc;
+  --gray-light:#eee9ee;
+  --blue:#3a1eee;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Montserrat&family=Kaushan+Script&display=swap');
+
+html {
+  font-size: 100%;
+} /*16px*/
+
+body {
+  background-color: var(--white);
+}
+
+.loading {
+  font-size: 2rem;
+}
+
+.table {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.table-title {
+  margin-bottom: 1.5rem;
+  color: var(--green-dark);
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid var(--black);
+}
+
+th,td {
+  border: 1px solid var(--black);
+  padding: 1rem;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+th {
+  font-size: 1.1rem;
+  background-color: var(--gray);
+  color: var(--white);
+}
+
+
+tr:nth-child(even) {
+  background-color: var(--green-light);
+}
+
+tr.primary{
+  border: 3px solid var(--blue);
+}
+
+.table-actions  button{
+  margin: 0 0.3rem 0.5rem 0.3rem;
+  text-transform: capitalize;
+  background-color: var(--white);
+  border: 1px solid var(--gray);
+  color: var(--gray);
+  padding: 0.5rem;
+  border-radius: 5%;
+}
+
+.table-actions  button:hover{
+  background-color: var(--gray-light);
+}
+
+.row-actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-weight: 600;
+}
+
+.row-actions *:hover {
+  color: var(--gray);
+  cursor: pointer;
+}
