@@ -38,7 +38,7 @@ const CatalogRow = (
             onChange={() => handleRowSelect(catalog._id)}
           />  
         </td> 
-        <td>{catalog.name}</td>
+        <td id='table-cat-name'>{catalog.name}</td>
         <td>{catalog.vertical}</td>
         <td>{isMultiLocal() ? "Yes" : "No"}</td>
         <td>{catalog.indexedAt ? convertLocaleTimeString(catalog.indexedAt): "Not indexed"}</td>

@@ -15,6 +15,8 @@ const Table = () => {
 
     const [openForm, setOpenForm] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(false)
+    const [filterNameKey, setFilterNameKey] = useState<string>('')
+    const [isMultiFilter, setIsMultiFilter] = useState<boolean>(false)
 
     useEffect(()=>{
         const fetchData = async ()=> {
@@ -76,7 +78,7 @@ const Table = () => {
     const onDeleteCatalogs = async ()=>{
         const catalogsToDelete = catalogs.filter(cat => cat.deleteChecked).map(cat => cat._id)
         if(catalogsToDelete.length === 0){
-            alert("Please choose cataloges to delete")
+            alert("Please select cataloges to delete")
             return
         }
         try {
@@ -98,14 +100,38 @@ const Table = () => {
         }
     }
 
+    const filterRows = (rows: TableCatalog[], nameKey: string, showMulti: boolean)=>{
+        return rows.filter((row) => {
+            return row.name.toLowerCase().includes(nameKey) && 
+                        (showMulti ? row.locales.length > 1 : true)
+        })
+    }
+
     return (
         <div className='table'>
             <div className='table-title'>Catalog Table</div>
             { loading ? <div className='loading'>Loading Table...</div>:
             <>
                 <div className='table-actions'>
-                    <button onClick={() => setOpenForm(true)}>add catalog</button>
-                    <button onClick={onDeleteCatalogs}>delete catalogs</button>
+                    <div className='filter-catalog'>
+                        <input id='input-filter-name' 
+                            placeholder='Fiter Catalogs by name...'
+                            onChange={(e)=>setFilterNameKey(e.target.value)}>
+                        </input>
+                        <label>
+                            <input
+                                id='input-filter-multi'
+                                type="checkbox"
+                                checked={isMultiFilter}
+                                onChange={() => setIsMultiFilter(prev => !prev)}
+                            />
+                            Show only catalogs with multi locations  
+                        </label>
+                    </div>
+                    <div>
+                        <button onClick={() => setOpenForm(true)}>add catalog</button>
+                        <button onClick={onDeleteCatalogs}>delete catalogs</button>
+                    </div>
                 </div>
                 <table>
                     <thead>
@@ -116,7 +142,7 @@ const Table = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {catalogs.map(cat => (
+                        {filterRows(catalogs, filterNameKey, isMultiFilter).map(cat => (
                             <CatalogRow catalog={cat} 
                             handleRowSelect={handleRowSelect}
                             onUpdateCatalog ={onUpdateCatalog}
